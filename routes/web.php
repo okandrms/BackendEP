@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 Route::get('', fn() => to_route('jobs.index'));
 
-Route::get('/jobs', [JobController::class, 'show'])->name('jobs');
+// Define the 'jobs.index' route
+Route::get('/jobs', [JobController::class, 'index'])->name('jobs.index');
+
+// Define the 'jobs.show' route for individual job detail
+Route::get('/jobs/{job}', [JobController::class, 'show'])->name('jobs.show');
