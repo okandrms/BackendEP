@@ -19,7 +19,7 @@
     <ul class="flex space-x-2">
       @auth
         <li>
-          {{ auth()->user()->name ?? 'Anynomus' }}
+          {{ auth()->user()->name ?? 'Anonymous' }}
         </li>
         <li>
           <form action="{{ route('auth.destroy') }}" method="POST">
@@ -31,6 +31,9 @@
       @else
         <li>
           <a href="{{ route('auth.create') }}">Sign in</a>
+        </li>
+        <li>
+          <a href="{{ route('auth.show') }}">Register</a>
         </li>
       @endauth
     </ul>
