@@ -7,7 +7,7 @@
                 <div class="bg-gray-200 text-lg font-bold p-4">{{ __('Register') }}</div>
 
                 <div class="p-4">
-                    <form method="POST" action="{{ route('auth.show') }}">
+                    <form method="POST" action="{{ route('auth.create') }}">
                         @csrf
 
                         <div class="mb-4">
