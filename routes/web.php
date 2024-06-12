@@ -3,7 +3,7 @@
 use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +31,7 @@ Route::get('/auth/create', [AuthController::class, 'create'])->name('auth.create
 Route::post('/auth/store', [AuthController::class, 'store'])->name('auth.store');
 
 
-Route::get('register', fn() => redirect()->route('auth.show'))->name('register');
+Route::get('/register', fn() => redirect()->route('auth.show'))->name('register');
 Route::get('/auth/show', [RegisterController::class, 'show'])->name('auth.show');
 Route::post('/auth/create', [RegisterController::class, 'create'])->name('auth.create');
 
