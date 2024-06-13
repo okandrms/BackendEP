@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\JobApplicationController;
+use App\Http\Controllers\MyJobApplicationController;
 
 
 /*
@@ -45,5 +46,8 @@ Route::delete('auth', [AuthController::class, 'destroy'])
 Route::middleware('auth')->group(function () {
     Route::get('job/{job}/application/create', [JobApplicationController::class, 'create'])->name('job.application.create');
     Route::post('job/{job}/application', [JobApplicationController::class, 'store'])->name('job.application.store');
+
+    Route::get('my-job-applications', [MyJobApplicationController::class, 'index'])->name('my_job_applications.index');
+    Route::delete('my-job-applications/{my_job_application}', [MyJobApplicationController::class, 'destroy'])->name('my_job_applications.destroy');
     
 });
