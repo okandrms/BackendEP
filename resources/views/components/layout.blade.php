@@ -43,7 +43,30 @@
     </div>
     @endif
 
-    {{ $slot }}
+    <ul class="flex space-x-2">
+      @auth
+        <li>
+          {{ auth()->user()->name ?? 'Anonymous' }}
+        </li>
+        <li>
+          <form action="{{ route('auth.destroy') }}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button>Logout</button>
+          </form>
+        </li>
+      @else
+        <li>
+          <a href="{{ route('auth.create') }}">Sign in</a>
+        </li>
+        <li>
+          <a href="{{ route('auth.show') }}">Register</a>
+        </li>
+      @endauth
+    </ul>
+  </nav>
+  {{ $slot }}
+
 </body>
 
 </html>
