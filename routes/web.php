@@ -6,7 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\MyJobApplicationController;
-
+use App\Http\Controllers\EmployerController;
+use App\Http\Controllers\MyJobController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,11 +45,17 @@ Route::delete('auth', [AuthController::class, 'destroy'])
     ->name('auth.destroy');
 
 Route::middleware('auth')->group(function () {
-    Route::get('job/{job}/application/create', [JobApplicationController::class, 'create'])->name('job.application.create');
-    Route::post('job/{job}/application', [JobApplicationController::class, 'store'])->name('job.application.store');
+Route::get('job/{job}/application/create', [JobApplicationController::class, 'create'])->name('job.application.create');
+Route::post('job/{job}/application', [JobApplicationController::class, 'store'])->name('job.application.store');
 
-    Route::get('my-job-applications', [MyJobApplicationController::class, 'index'])->name('my_job_applications.index');
-    Route::delete('my-job-applications/{my_job_application}', [MyJobApplicationController::class, 'destroy'])->name('my_job_applications.destroy');
+Route::get('my-job-applications', [MyJobApplicationController::class, 'index'])->name('my_job_applications.index');
+Route::delete('my-job-applications/{my_job_application}', [MyJobApplicationController::class, 'destroy'])->name('my_job_applications.destroy');
+
+Route::get('employer/create', [EmployerController::class, 'create'])->name('employer.create');
+Route::post('employer', [EmployerController::class, 'store'])->name('employer.store');
+
+Route::middleware('employer')
+        ->resource('my-jobs', MyJobController::class);
     
 });
 
