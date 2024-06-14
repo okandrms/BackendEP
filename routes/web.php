@@ -51,3 +51,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('my-job-applications/{my_job_application}', [MyJobApplicationController::class, 'destroy'])->name('my_job_applications.destroy');
     
 });
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
