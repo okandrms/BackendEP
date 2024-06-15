@@ -14,6 +14,15 @@ use Illuminate\Auth\Authenticable;
 class Job extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'title',
+        'location',
+        'salary',
+        'description',
+        'experience',
+        'category'
+    ];
     
     public static array $experience = ['entry', 'intermediate', 'senior'];
     public static array $category = ['IT','Finance','Sales','Marketing'];
