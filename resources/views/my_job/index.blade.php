@@ -5,6 +5,12 @@
     <x-link-button href="{{ route('my-jobs.create') }}">Add New</x-link-button>
   </div>
 
+  @if (session('success'))
+    <div class="mb-4 text-green-500">
+      {{ session('success') }}
+    </div>
+  @endif
+
   @forelse ($jobs as $job)
     <x-job-card :$job>
       <div class="text-xs text-slate-500">
@@ -28,6 +34,11 @@
 
         <div class="flex space-x-2">
           <x-link-button href="{{ route('my-jobs.edit', $job) }}">Edit</x-link-button>
+          <form action="{{ route('my-jobs.destroy', $job) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
+            @csrf
+            @method('DELETE')
+            <x-button type="submit">Delete</x-button>
+          </form>
         </div>
         
       </div>
@@ -38,7 +49,7 @@
         No jobs yet
       </div>
       <div class="text-center">
-        Post your first job <a class="text-indigo-500 hover:underline"
+         Post your first job <a class="text-indigo-500 hover:underline"
           href="{{ route('my-jobs.create') }}">here!</a>
       </div>
     </div>
