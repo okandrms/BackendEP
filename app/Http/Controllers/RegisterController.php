@@ -31,10 +31,29 @@ class RegisterController extends Controller
 
     protected function validator(array $data)
     {
+        $messages = [
+            'password.min' => 'Password requires at least 8 characters and 1 special character.',
+            'password.regex' => 'Password requires at least 1 special character.'
+        ];
+
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'confirmed'],
+            'password' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) {
+                    // Check for minimum length of 8 characters
+                    if (strlen($value) < 8) {
+                        // Check for at least one special character
+                        if (!preg_match('/[^\w\s]/', $value)) {
+                            $fail('Password requires at least 8 characters and 1 special character.');
+                        } else {
+                            $fail('Password requires at least 8 characters.');
+                        }
+                    }
+                },
+                'confirmed',],
         ]);
     }
 

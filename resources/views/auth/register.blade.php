@@ -1,63 +1,36 @@
 <x-layout>
+    <h1 class="my-16 text-center text-4xl font-semibold text-indigo-700">
+        Register to your account
+    </h1>
 
-<div class="container mx-auto">
-    <div class="flex justify-center">
-        <div class="w-full md:w-8/12">
-            <div class="bg-white shadow-md rounded-lg">
-                <div class="bg-gray-200 text-lg font-bold p-4">{{ __('Register') }}</div>
+    <x-card class="py-8 px-12 bg-white border border-gray-200 rounded-lg shadow-md">
+        <form action="{{ route('auth.create') }}" method="POST">
+            @csrf
 
-                <div class="p-4">
-                    <form method="POST" action="{{ route('auth.create') }}">
-                        @csrf
-
-                        <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium text-gray-700">{{ __('Name') }}</label>
-
-                            <input id="name" type="text" class="form-input mt-1 block w-full @error('name') border-red-500 @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                            @error('name')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-4">
-                            <label for="email" class="block text-sm font-medium text-gray-700">{{ __('E-Mail Address') }}</label>
-
-                            <input id="email" type="email" class="form-input mt-1 block w-full @error('email') border-red-500 @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                            @error('email')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-4">
-                           <label for="password" class="block text-sm font-medium text-gray-700">{{ __('Password') }}</label>
-
-                             <input id="password" type="password" class="form-input mt-1 block w-full @error('password') border-red-500 @enderror" name="password" required autocomplete="new-password" minlength="8" >
-                                 @error('password')
-                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                               @enderror
-                        </div>
-
-
-
-
-                        <div class="mb-4">
-                            <label for="password-confirm" class="block text-sm font-medium text-gray-700">{{ __('Confirm Password') }}</label>
-
-                            <input id="password-confirm" type="password" class="form-input mt-1 block w-full" name="password_confirmation" required autocomplete="new-password">
-                        </div>
-
-                        <div class="mt-4">
-                            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
-                                {{ __('Register') }}
-                            </button>
-                        </div>
-                    </form>
-                </div>
+            <div class="mb-6">
+                <x-label for="name" :required="true" class="text-gray-700">Name</x-label>
+                <x-text-input name="name" class="mt-2 rounded-md" />
             </div>
-        </div>
-    </div>
-</div>
 
+            <div class="mb-6">
+                <x-label for="email" :required="true" class="text-gray-700">E-mail</x-label>
+                <x-text-input name="email" class="mt-2 rounded-md" />
+            </div>
+
+            <div class="mb-6">
+                <x-label for="password" :required="true" class="text-gray-700">Password</x-label>
+                <x-text-input name="password" type="password" class="mt-2 rounded-md" />
+            </div>
+
+            <div class="mb-6">
+                <x-label for="password_confirmation" :required="true" class="text-gray-700">Confirm Password</x-label>
+                <x-text-input name="password_confirmation" type="password" class="mt-2 rounded-md" />
+            </div>
+
+            <x-button class="w-full bg-gradient-to-r from-indigo-400 to-purple-500 text-white font-semibold rounded-full shadow-md hover:bg-gradient-to-br hover:from-indigo-500 hover:to-purple-600 hover:text-gray-100 transition-all duration-200">
+                Register
+            </x-button>
+        </form>
+    </x-card>
 </x-layout>
+
