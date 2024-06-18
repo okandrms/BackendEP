@@ -11,6 +11,8 @@ class MyJobController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     
     public function index()
     {
         $this->authorize('viewAnyEmployer', Job::class);
@@ -20,6 +22,7 @@ class MyJobController extends Controller
                 'jobs' => auth()->user()->employer
                     ->jobs()
                     ->with(['employer', 'jobApplications', 'jobApplications.user'])
+                   
                     ->get()
             ]
         );
@@ -72,8 +75,13 @@ class MyJobController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Job $myJob)
     {
-        //
+        $this->authorize('delete', $myJob);
+        $myJob->forceDelete();
+
+        return redirect()->route('my-jobs.index')
+            ->with('success', 'Job deleted successfully.');
     }
+
 }
