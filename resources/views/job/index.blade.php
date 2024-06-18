@@ -1,7 +1,7 @@
 <x-layout>
   <x-breadcrumbs class="mb-4" :links="['Jobs' => route('jobs.index')]" />
 
-  <x-card class="mb-4 text-sm" x-data="">
+  <x-card class="mb-4 text-sm bg-gradient-to-r from-indigo-100 to-emerald-100" x-data="">
     <form x-ref="filters" id="filtering-form" action="{{ route('jobs.index') }}" method="GET">
       <div class="mb-4 grid grid-cols-2 gap-4">
         <div>

@@ -16,31 +16,38 @@
       <div class="text-xs text-slate-500">
         @forelse ($job->jobApplications as $application)
           <div class="mb-4 flex items-center justify-between">
-            <div>
+            <div class="text-indigo-500">
               <div>{{ $application->user->name }}</div>
-              <div>
+              <div class="text-indigo-500">
                 Applied {{ $application->created_at->diffForHumans() }}
               </div>
-              <div>
+              <!-- Changed Text Color to Indigo -->
+              <div class="text-indigo-500">
                 Download CV
               </div>
             </div>
 
-            <div>${{ number_format($application->expected_salary) }}</div>
+            <div class="text-indigo-500">${{ number_format($application->expected_salary) }}</div>
           </div>
         @empty
-          <div>No applications yet</div>
+          <div class="text-indigo-500">No applications yet</div>
+          <div class="mt-4 flex space-x-2">
+            <div class="flex items-center">
+                <x-link-button href="{{ route('my-jobs.edit', $job) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded-lg">
+                    Edit
+                </x-link-button>
+            </div>
+            <div class="flex items-center">
+                <form action="{{ route('my-jobs.destroy', $job) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
+                    @csrf
+                    @method('DELETE')
+                    <x-button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded-lg">
+                        Delete
+                    </x-button>
+                </form>
+            </div>
+          </div>
         @endforelse
-
-        <div class="flex space-x-2">
-          <x-link-button href="{{ route('my-jobs.edit', $job) }}">Edit</x-link-button>
-          <form action="{{ route('my-jobs.destroy', $job) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
-            @csrf
-            @method('DELETE')
-            <x-button type="submit">Delete</x-button>
-          </form>
-        </div>
-        
       </div>
     </x-job-card>
   @empty
