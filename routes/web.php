@@ -8,6 +8,7 @@ use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\MyJobApplicationController;
 use App\Http\Controllers\EmployerController;
 use App\Http\Controllers\MyJobController;
+use App\Http\Controllers\ChartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,3 +64,9 @@ Route::middleware('employer')
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+Route::get('/jobs/{id}', [ChartController::class, 'show']);
+Route::get('/get-jobs', [ChartController::class, 'getJobs']);
+
+
+

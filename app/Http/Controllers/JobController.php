@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class JobController extends Controller
 {
@@ -37,6 +38,8 @@ class JobController extends Controller
             ['job' => $job -> load('employer.jobs')]
         );
     }
+
+    
 
 
 }
