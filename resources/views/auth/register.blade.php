@@ -31,14 +31,16 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="password" class="block text-sm font-medium text-gray-700">{{ __('Password') }}</label>
+                           <label for="password" class="block text-sm font-medium text-gray-700">{{ __('Password') }}</label>
 
-                            <input id="password" type="password" class="form-input mt-1 block w-full @error('password') border-red-500 @enderror" name="password" required autocomplete="new-password">
-
-                            @error('password')
-                                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-                            @enderror
+                             <input id="password" type="password" class="form-input mt-1 block w-full @error('password') border-red-500 @enderror" name="password" required autocomplete="new-password" minlength="8" >
+                                 @error('password')
+                                 <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                               @enderror
                         </div>
+
+
+
 
                         <div class="mb-4">
                             <label for="password-confirm" class="block text-sm font-medium text-gray-700">{{ __('Confirm Password') }}</label>
