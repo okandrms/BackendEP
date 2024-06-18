@@ -4,17 +4,25 @@
   <x-job-card :$job>
     <p class="mb-4 text-sm text-slate-500">
       {!! nl2br(e($job->description)) !!}
-     </p>
+    </p>
 
-    @can('apply', $job)
-      <x-link-button :href="route('job.application.create', $job)">
-        Apply
-      </x-link-button>
+    @if(auth()->check())
+      @can('apply', $job)
+        <x-link-button :href="route('job.application.create', $job)">
+          Apply
+        </x-link-button>
+      @else
+        <div class="text-center text-sm font-medium text-slate-500">
+          You already applied to this job
+        </div>
+      @endcan
     @else
       <div class="text-center text-sm font-medium text-slate-500">
-        You already applied to this job
+        <a href="{{ route('login') }}" class="text-blue-500 no-underline hover:text-blue-800 transition duration-300 ease-in-out">
+          Please login, or register before applying
+        </a>
       </div>
-    @endcan
+    @endif
   </x-job-card>
 
   <x-card class="mb-4">
@@ -42,4 +50,7 @@
       @endforeach
     </div>
   </x-card>
+  <x-charts>
+  
+  </x-charts>
 </x-layout>

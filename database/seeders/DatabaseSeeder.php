@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
          
         $employers = \App\Models\Employer::all();
 
-        for($i = 0; $i < 30; $i++){
+        for($i = 0; $i < 50; $i++){
             \App\Models\Job::factory()->create([
                 'employer_id' => $employers->random()->id
             ]);
