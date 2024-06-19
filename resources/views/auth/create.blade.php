@@ -3,7 +3,7 @@
       Sign in to your account
   </h1>
 
-  <x-card class="py-8 px-12 bg-white border border-gray-200 rounded-lg shadow-md">
+  <x-card class="py-8 px-12 bg-white border border-gray-200 rounded-2xl shadow-md">
       <form action="{{ route('auth.store') }}" method="POST">
           @csrf
 
