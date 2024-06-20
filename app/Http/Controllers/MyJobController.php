@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Job;
 use Illuminate\Http\Request;
 use App\Http\Requests\JobRequest;
+use App\Mail\JobDeletedNotification;
+use Illuminate\Support\Facades\Mail;
 
 class MyJobController extends Controller
 {
@@ -78,6 +80,17 @@ class MyJobController extends Controller
     public function destroy(Job $myJob)
     {
         $this->authorize('delete', $myJob);
+
+        // Retrieve all job applications for this job
+        $applicants = $myJob->jobApplications;
+
+        // Send email notifications to applicants
+        foreach ($applicants as $application) {
+            $applicant = $application->user;
+            Mail::to($applicant->email)->send(new JobDeletedNotification($myJob, $applicant));
+        }
+
+        // Force delete the job
         $myJob->forceDelete();
 
         return redirect()->route('my-jobs.index')
