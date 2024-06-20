@@ -64,11 +64,11 @@
                 },
                 yaxis: {
                     title: {
-                        text:'Salary',
+                        text: 'Salary',
                     },
                     labels: {
                         formatter: function(value) {
-                            let formattedValue ='€'+ value.toFixed().replace(/\d(?=(\d{3})+(?!\d))/g, '$& ');
+                            let formattedValue = '€' + value.toFixed().replace(/\d(?=(\d{3})+(?!\d))/g, '$& ');
                             return formattedValue;
                         }
                     }
@@ -79,13 +79,14 @@
                         shade: 'light',
                         type: "horizontal",
                         shadeIntensity: 0.25,
-                        gradientToColors: undefined,
+                        gradientToColors: ['#7C3AED', '#8B5CF6'], 
                         inverseColors: true,
                         opacityFrom: 0.85,
                         opacityTo: 0.85,
                         stops: [50, 0, 100]
                     },
-                }
+                },
+                colors: ['#6366F1', '#7C3AED'] 
             };
 
             var chart = new ApexCharts(document.querySelector("#chart"), options);
@@ -96,4 +97,5 @@
     </script>
 </body>
 </html>
+
 

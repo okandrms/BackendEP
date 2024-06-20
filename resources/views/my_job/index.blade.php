@@ -1,8 +1,12 @@
 <x-layout>
-  <x-breadcrumbs :links="['My Jobs' => '#']" class="mb-4" />
-
-  <div class="mb-8 text-right">
-    <x-link-button href="{{ route('my-jobs.create') }}">Add New</x-link-button>
+  <div class="flex justify-between items-center mb-4">
+    <x-breadcrumbs :links="['My Jobs' => '#']" />
+    
+    <div>
+      <a href="{{ route('my-jobs.create') }}" class="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 text-white rounded-full w-12 h-12 transition duration-300 transform hover:scale-110">
+        <i class="fas fa-plus"></i>
+      </a>
+    </div>
   </div>
 
   @if (session('success'))
@@ -12,7 +16,7 @@
   @endif
 
   @forelse ($jobs as $job)
-    <x-job-card :$job>
+    <x-job-card :job="$job">
       <div class="text-xs text-slate-500">
         @forelse ($job->jobApplications as $application)
           <div class="mb-4 flex items-center justify-between">
@@ -21,7 +25,6 @@
               <div class="text-indigo-500">
                 Applied {{ $application->created_at->diffForHumans() }}
               </div>
-              <!-- Changed Text Color to Indigo -->
               <div class="text-indigo-500">
                 Download CV
               </div>
@@ -31,23 +34,24 @@
           </div>
         @empty
           <div class="text-indigo-500">No applications yet</div>
-          <div class="mt-4 flex space-x-2">
-            <div class="flex items-center">
-                <x-link-button href="{{ route('my-jobs.edit', $job) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded-lg">
-                    Edit
-                </x-link-button>
-            </div>
-            <div class="flex items-center">
-                <form action="{{ route('my-jobs.destroy', $job) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
-                    @csrf
-                    @method('DELETE')
-                    <x-button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded-lg">
-                        Delete
-                    </x-button>
-                </form>
-            </div>
-          </div>
         @endforelse
+
+        <div class="mt-4 flex space-x-4">
+          <div class="flex items-center text-indigo-500 hover:text-indigo-600 cursor-pointer transition duration-300 transform hover:scale-110">
+            <a href="{{ route('my-jobs.edit', $job) }}">
+              <i class="fas fa-edit fa-2x"></i>
+            </a>
+          </div>
+          <div class="flex items-center">
+            <form action="{{ route('my-jobs.destroy', $job) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this job?');">
+              @csrf
+              @method('DELETE')
+              <button type="submit" class="text-indigo-500 hover:text-indigo-600 cursor-pointer transition duration-300 transform hover:scale-110">
+                <i class="fas fa-trash-alt fa-2x"></i>
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </x-job-card>
   @empty
@@ -62,3 +66,5 @@
     </div>
   @endforelse
 </x-layout>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
