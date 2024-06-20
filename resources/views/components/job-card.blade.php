@@ -15,12 +15,12 @@
       </div>
       <div class="flex space-x-2 text-xs">
           <x-tag class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full shadow-sm hover:bg-indigo-200 hover:text-indigo-800 transition-colors duration-200">
-              <a href="{{ route('jobs.index', ['experience' => $job->experience]) }}">
+              <a id="experience" href="{{ route('jobs.index', ['experience' => $job->experience]) }}">
                   {{ Str::ucfirst($job->experience) }}
               </a>
           </x-tag>
           <x-tag class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full shadow-sm hover:bg-gray-200 hover:text-gray-900 transition-colors duration-200">
-              <a href="{{ route('jobs.index', ['category' => $job->category]) }}">
+              <a id="category" href="{{ route('jobs.index', ['category' => $job->category]) }}">
                   {{ $job->category }}
               </a>
           </x-tag>
