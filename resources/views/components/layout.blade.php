@@ -12,7 +12,6 @@
     <nav class="mb-8 flex justify-between items-center px-4 py-2 bg-gradient-to-r from-indigo-100 to-emerald-100 text-white rounded-md">
         <ul class="flex space-x-4 text-lg font-medium items-center">
             <li>
-                <!-- Logo -->
                 <a href="{{ route('jobs.index') }}" class="flex items-center">
                     <img src="{{ asset('images/JobFactory.png') }}" alt="" class="h-14 w-auto">
                 </a>
@@ -44,7 +43,7 @@
             @endauth
         </ul>
 
-        <ul class="flex space-x-4 text-lg font-medium hidden md:flex">
+        <ul class=" space-x-4 text-lg font-medium hidden md:flex">
             @auth
             <li>
                 <span class="text-sm text-gray-600">Welcome, {{ explode(' ', auth()->user()->name)[0]?? 'Anonymous' }}</span>

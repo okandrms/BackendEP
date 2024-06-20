@@ -25,8 +25,8 @@
         }
 
         async function renderChart() {
-            const currentCategory = 'IT';
-            const currentExperience = 'Entry';
+            const currentCategory = document.getElementById('category').text.trim();
+            const currentExperience = document.getElementById('experience').text.trim();
             const jobsData = await fetchJobData(currentCategory, currentExperience);
 
             var options = {
