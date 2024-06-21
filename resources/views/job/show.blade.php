@@ -50,7 +50,26 @@
         @endforeach
     </div>
 </x-card>
+<x-card class="bg-gradient-to-r from-indigo-100 to-emerald-100 mb-4 border border-gray-200 rounded-lg shadow-md overflow-hidden">
+  <h2 class="mb-4 text-xl font-semibold text-indigo-700">
+    Compare with Other Jobs in the Same Category and Experience Level
+  </h2>
+  <div class="text-sm text-slate-500 mb-4">
+    <div class="flex space-x-2 text-xs">
+      <x-tag class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-full shadow-sm hover:bg-indigo-200 hover:text-indigo-800 transition-colors duration-200">
+          <a id="experience" href="{{ route('jobs.index', ['experience' => $job->experience]) }}">
+              {{ Str::ucfirst($job->experience) }}
+          </a>
+      </x-tag>
+      <x-tag class="bg-gray-100 text-gray-800 px-3 py-1 rounded-full shadow-sm hover:bg-gray-200 hover:text-gray-900 transition-colors duration-200">
+          <a id="category" href="{{ route('jobs.index', ['category' => $job->category]) }}">
+              {{ $job->category }}
+          </a>
+      </x-tag>
+  </div>
+  </div>
   <x-charts>
-  
+    
   </x-charts>
+</x-card>
 </x-layout>
