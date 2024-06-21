@@ -26,7 +26,9 @@
                 Applied {{ $application->created_at->diffForHumans() }}
               </div>
               <div class="text-indigo-500">
-                Download CV
+                <a href="{{ route('applications.downloadCv', $application) }}" class="text-indigo-500 hover:underline">
+                  Download CV
+                </a>
               </div>
             </div>
 

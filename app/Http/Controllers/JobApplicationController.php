@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Job;
 use App\Mail\JobApplicationReceived;
 use Illuminate\Support\Facades\Mail;
+use App\Models\JobApplication;
 
 class JobApplicationController extends Controller
 {
@@ -36,15 +37,14 @@ class JobApplicationController extends Controller
     // Get authenticated user
     $user = auth()->user();
 
-    
+    // Get the employer associated with the job
     $employer = $job->employer;
+    $company_name = $employer->company_name;
 
-    
-    $company_name = $employer->company_name; 
-
-    // Store the CV file in a private storage
+    // Store the CV file in a private storage with the original file name
     $file = $request->file('cv');
-    $path = $file->store('cvs', 'private');
+    $originalFileName = $file->getClientOriginalName();
+    $path = $file->storeAs('cvs', $originalFileName, 'private');
 
     // Create a new job application record
     $job->jobApplications()->create([
@@ -68,4 +68,18 @@ class JobApplicationController extends Controller
     {
         //
     }
+
+    public function downloadCv(JobApplication $application)
+{
+    $this->authorize('view', $application); // Ensure the user is authorized to view the application
+
+    $filePath = storage_path('app/private/' . $application->cv_path);
+
+    if (!file_exists($filePath)) {
+        abort(404, 'CV not found.');
+    }
+
+    return response()->download($filePath);
+}
+
 }
