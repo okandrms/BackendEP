@@ -14,7 +14,7 @@
         <p class="mt-2 text-gray-600">click on the button below to view all available jobs on our website.</p>
         <a href="{{ route('jobs.index') }}" class="mt-4 inline-block px-3 py-2 bg-gradient-to-r from-indigo-400 to-purple-500 text-white font-semibold rounded-full shadow-sm hover:bg-gradient-to-br hover:from-indigo-500 hover:to-purple-600 hover:text-gray-100 transition-transform transform-gpu hover:-translate-y-1 hover:shadow-lg">View Available Jobs</a>
         <p class="mt-6 text-gray-600">Best regards,</p>
-        <p class="text-gray-600">{{ config('app.name') }}</p>
+        <p class="text-gray-600">Job Factory</p>
         
         
         
