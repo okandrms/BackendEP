@@ -53,6 +53,9 @@ Route::middleware('auth')->group(function () {
 Route::get('job/{job}/application/create', [JobApplicationController::class, 'create'])->name('job.application.create');
 Route::post('job/{job}/application', [JobApplicationController::class, 'store'])->name('job.application.store');
 
+
+Route::get('/applications/{application}/download', [JobApplicationController::class, 'downloadCv'])->name('applications.downloadCv');
+
 Route::get('my-job-applications', [MyJobApplicationController::class, 'index'])->name('my_job_applications.index');
 Route::delete('my-job-applications/{my_job_application}', [MyJobApplicationController::class, 'destroy'])->name('my_job_applications.destroy');
 
@@ -63,6 +66,7 @@ Route::middleware('employer')
         ->resource('my-jobs', MyJobController::class);
     
 });
+
 
 
 Route::get('password/reset', [AuthController::class, 'showLinkRequestForm'])->name('password.request');

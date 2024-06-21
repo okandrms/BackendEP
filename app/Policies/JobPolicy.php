@@ -5,12 +5,22 @@ namespace App\Policies;
 use App\Models\Job;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Auth\Access\HandlesAuthorization;
 
 class JobPolicy
 {
     /**
      * Determine whether the user can view any models.
      */
+    use HandlesAuthorization;
+
+    /**
+     * Determine whether the user can apply for the job.
+     */
+    public function apply(User $user, Job $job): bool
+    {
+        return !$job->hasUserApplied($user);
+    }
     public function viewAny(?User $user): bool
     {
         return true;
@@ -77,8 +87,5 @@ class JobPolicy
         return $job->employer->user_id === $user->id;
     }
 
-    public function apply(User $user, Job $job): bool
-    {
-        return !$job->hasUserApplied($user);
-    }
+    
 }
