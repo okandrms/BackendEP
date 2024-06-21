@@ -52,7 +52,7 @@
 </x-card>
 <x-card class="bg-gradient-to-r from-indigo-100 to-emerald-100 mb-4 border border-gray-200 rounded-lg shadow-md overflow-hidden">
   <h2 class="mb-4 text-xl font-semibold text-indigo-700">
-    Compare with Other Jobs in the Same Category and Experience Level
+    Compare with other jobs in the same category and experience level
   </h2>
   <div class="text-sm text-slate-500 mb-4">
     <div class="flex space-x-2 text-xs">
