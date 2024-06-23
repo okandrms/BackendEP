@@ -61,6 +61,7 @@ Route::delete('my-job-applications/{my_job_application}', [MyJobApplicationContr
 
 Route::get('employer/create', [EmployerController::class, 'create'])->name('employer.create');
 Route::post('employer', [EmployerController::class, 'store'])->name('employer.store');
+Route::post('/employer/store', [EmployerController::class, 'store'])->name('employer.store');
 
 Route::middleware('employer')
         ->resource('my-jobs', MyJobController::class);
@@ -82,6 +83,7 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::get('/jobs/{id}', [ChartController::class, 'show']);
 Route::get('/get-jobs', [ChartController::class, 'getJobs']);
+
 
 
 

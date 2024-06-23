@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Employer;
 
 class EmployerController extends Controller
 {
@@ -24,7 +25,7 @@ class EmployerController extends Controller
             ])
         );
 
-        return redirect()->route('jobs.index')
+        return redirect('http://127.0.0.1:8000/my-jobs')
             ->with('success', 'Your employer account was created!');
     }
 }
