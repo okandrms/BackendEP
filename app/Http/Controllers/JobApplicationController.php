@@ -30,7 +30,7 @@ class JobApplicationController extends Controller
 
     // Validate incoming request data
     $validatedData = $request->validate([
-        'expected_salary' => 'required|numeric|min:1|max:1000000',
+        'expected_salary' => 'required|numeric|min:1|max:5000000',
         'cv' => 'required|file|mimes:pdf|max:2048'
     ]);
 
@@ -71,7 +71,7 @@ class JobApplicationController extends Controller
 
     public function downloadCv(JobApplication $application)
 {
-    $this->authorize('view', $application); // Ensure the user is authorized to view the application
+    $this->authorize('view', $application); 
 
     $filePath = storage_path('app/private/' . $application->cv_path);
 
@@ -81,5 +81,6 @@ class JobApplicationController extends Controller
 
     return response()->download($filePath);
 }
+
 
 }

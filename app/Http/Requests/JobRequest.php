@@ -25,10 +25,16 @@ class JobRequest extends FormRequest
         return [
             'title' => 'required|string|max:255',
             'location' => 'required|string|max:255',
-            'salary' => 'required|numeric|min:5000',
+            'salary' => 'required|numeric|min:5000|max:5000000',
             'description' => 'required|string',
             'experience' => 'required|in:' . implode(',', Job::$experience),
             'category' => 'required|in:' . implode(',', Job::$category)
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'salary.max' => 'The salary field can not be higher than 5000000.',
         ];
     }
 }
