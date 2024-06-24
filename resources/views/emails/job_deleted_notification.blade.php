@@ -8,7 +8,7 @@
     <div class="max-w-lg mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
         <h1 class="text-2xl font-bold text-gray-800">Job application unavailable</h1>
         <p class="mt-4 text-gray-600">Hello {{ $applicant->name }},</p>
-        <p class="mt-2 text-gray-600">We regret to inform you that the job "{{ $job->title }}" from the company "" that you applied for is no longer available.</p>
+        <p class="mt-2 text-gray-600">We regret to inform you that the job "{{ $job->title }}" from "{{ $company_name }}" that you applied for is no longer available.</p>
         <p class="mt-2 text-gray-600">Hopefully you will find another job that meets your qualifications.</p>
         <p class="mt-2 text-gray-600">If you have any questions or concerns, please don't hesitate to contact us.</p>
         <p class="mt-2 text-gray-600">click on the button below to view all available jobs on our website.</p>

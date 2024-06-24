@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Job;
+use App\Models\User;
+use App\Models\Employer;
 use Illuminate\Http\Request;
 use App\Http\Requests\JobRequest;
 use App\Mail\JobDeletedNotification;
@@ -13,8 +15,6 @@ class MyJobController extends Controller
     /**
      * Display a listing of the resource.
      */
-
-     
     public function index()
     {
         $this->authorize('viewAnyEmployer', Job::class);
@@ -24,7 +24,6 @@ class MyJobController extends Controller
                 'jobs' => auth()->user()->employer
                     ->jobs()
                     ->with(['employer', 'jobApplications', 'jobApplications.user'])
-                   
                     ->get()
             ]
         );
@@ -50,8 +49,6 @@ class MyJobController extends Controller
         return redirect()->route('my-jobs.index')
             ->with('success', 'Job created successfully.');
     }
-
-    
 
     /**
      * Show the form for editing the specified resource.
@@ -81,13 +78,16 @@ class MyJobController extends Controller
     {
         $this->authorize('delete', $myJob);
 
+        // Retrieve the employer
+        $employer = $myJob->employer;
+
         // Retrieve all job applications for this job
         $applicants = $myJob->jobApplications;
 
         // Send email notifications to applicants
         foreach ($applicants as $application) {
             $applicant = $application->user;
-            Mail::to($applicant->email)->send(new JobDeletedNotification($myJob, $applicant));
+            Mail::to($applicant->email)->send(new JobDeletedNotification($myJob, $applicant, $employer));
         }
 
         // Force delete the job
@@ -96,5 +96,4 @@ class MyJobController extends Controller
         return redirect()->route('my-jobs.index')
             ->with('success', 'Job deleted successfully.');
     }
-
 }
