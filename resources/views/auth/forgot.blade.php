@@ -8,12 +8,12 @@
             @csrf
 
             <div class="mb-6">
-                <x-label for="email" :required="true" class="text-gray-700">Email Address</x-label>
+                <x-label for="email" :required="true" class="text-gray-700">E-mail</x-label>
                 <x-text-input name="email" type="email" class="mt-2 rounded-md" required />
             </div>
 
             <x-button class="w-full bg-gradient-to-r from-indigo-400 to-purple-500 text-white font-semibold rounded-full shadow-md hover:bg-gradient-to-br hover:from-indigo-500 hover:to-purple-600 hover:text-gray-100 transition-all duration-200">
-                Send Password Reset Link
+                Reset password
             </x-button>
         </form>
 
